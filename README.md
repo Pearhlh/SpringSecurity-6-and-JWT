@@ -26,6 +26,6 @@ To get started with this project, you will need to have the following installed 
 To build and run the project, follow these steps:
 
 * Clone the repository: `git clone https://github.com/Pearhlh/SpringSecurity-6-and-JWT.git`
-* Add database "jwt_security" to mysql
+* Add database "jwt_demo" to mysql
 
 -> The application will be available at http://localhost:8080.
