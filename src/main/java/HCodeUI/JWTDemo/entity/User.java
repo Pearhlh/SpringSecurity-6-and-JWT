@@ -7,7 +7,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,26 +35,26 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "The firstname is required")
-    @Size(min = 2,max = 50)
+    @Size(min = 2, max = 50)
     private String firstname;
     @NotBlank(message = "The lastname is required")
-    @Size(min = 2,max = 50)
+    @Size(min = 2, max = 50)
     private String lastname;
     @NotBlank(message = "The username is required")
-    @Size(min = 3,max = 50)
+    @Size(min = 3, max = 50)
     private String username;
     @NotBlank(message = "The email is required")
     @Size(max = 50)
     @Email
     private String email;
     @NotBlank(message = "The password is required")
-    @Size(min = 3,max = 100)
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).*$",message = "The password need to include 1 letter,1 number,1 special character")
+    @Size(min = 3, max = 100)
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).*$", message = "The password need to include 1 letter,1 number,1 special character")
     @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Token> tokens;
 
     @Lob

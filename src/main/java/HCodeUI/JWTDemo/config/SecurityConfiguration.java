@@ -22,9 +22,33 @@ import static org.springframework.http.HttpMethod.*;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**"};
+    private static final String[] WHITE_LIST_URL = {
+            "/api/v1/auth/**",
+            "/api/v1/actuator/**",
+
+//            Swagger
+//            "/v2/api-docs",
+//            "/v3/api-docs",
+//            "/v3/api-docs/**",
+            "/api-docs",
+            "/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/swagger-ui/index.html",
+            "/webjars/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-ui-standalone-preset.js",
+            "/swagger-initializer.js",
+            "/swagger-ui-bundle.js",
+            "/favicon-32x32.png",
+            "/favicon-16x16.png",
+            "/swagger-ui/swagger-ui.css"
+    };
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final LogoutHandler logoutHandler;

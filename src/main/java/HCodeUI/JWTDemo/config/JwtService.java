@@ -21,10 +21,12 @@ public class JwtService {
     private long jwtExpired;
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
-    public String getUerNameFromToken(String token){
+
+    public String getUerNameFromToken(String token) {
         String userName = Jwts.parser().setSigningKey(getSignKey()).parseClaimsJws(token).getBody().getSubject();
         return userName;
     }
+
     public String generateToken(UserDetails userDetails) {
         return buildToken(new HashMap<>(), userDetails, jwtExpired);
     }

@@ -100,18 +100,18 @@ public class AuthenticationService {
             HttpServletResponse response
     ) throws IOException {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if(authHeader == null || !authHeader.startsWith("Bearer ")){
-            return ;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return;
         }
         String refresh_token = authHeader.substring(7);
         String username = jwtService.getUerNameFromToken(refresh_token);
-        if(username != null) {
+        if (username != null) {
             var user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
             if (jwtService.isValidToken(refresh_token, user)) {
                 String access_token = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, access_token);
-                var authResponse =  AuthenticationResponse
+                var authResponse = AuthenticationResponse
                         .builder()
                         .token(access_token)
                         .refreshToken(refresh_token)

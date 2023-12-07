@@ -1,6 +1,7 @@
 package HCodeUI.JWTDemo.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -33,10 +34,10 @@ public enum Role {
                     MANAGER_DELETE,
                     MANAGER_CREATE
             )
-    )
-    ;
+    );
     @Getter
     private final Set<Permission> permissions;
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
         var authorities = getPermissions()
                 .stream().map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
